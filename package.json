@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "eslint . && mocha"
+    "test": "eslint . && mocha",
+    "seed": "knex migrate:rollback; knex migrate:latest; knex seed:run",
+    "seed-prod": "heroku run 'knex migrate:rollback; knex migrate:latest; knex seed:run'"
   },
   "keywords": [],
   "author": "",
