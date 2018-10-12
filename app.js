@@ -4,9 +4,9 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
-const accountsRoutes = require('./src/routes/accounts.js');
+const accountsRouter = require('./src/routes/accounts');
 
-app.use('/accounts', accountsRoutes);
+app.use('/accounts', accountsRouter);
 
 app.all('*', (req, res) => res.sendStatus(404));
 
