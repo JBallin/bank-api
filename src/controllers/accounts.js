@@ -12,13 +12,13 @@ const getAllAccounts = (req, res, next) => {
 
 const getAccountById = (req, res, next) => {
   const { id } = req.params;
-  const promise = model.getAccountById(id);
+  model.getAccountById(id)
+    .then(result => (result.error ? next(result) : res.status(200).json(result)))
+    .catch((err) => {
+      next(err);
+    });
+};
 
-  promise.then(result => (result.error ? next(result) : res.status(200).json(result)));
-
-  promise.catch((err) => {
-    next(err);
-  });
 };
 
 module.exports = { getAllAccounts, getAccountById };
