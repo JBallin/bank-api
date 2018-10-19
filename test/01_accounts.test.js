@@ -8,7 +8,7 @@ describe('/accounts', () => {
     .then(() => knex.migrate.latest())
     .then(() => knex.seed.run()));
 
-  it('GET: status=200 type=json body=(Array of Objects)', (done) => {
+  it('GET', (done) => {
     request(app)
       .get('/accounts')
       .expect(200)
