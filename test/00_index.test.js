@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../app');
 
 describe('/', () => {
-  it('GET', (done) => {
+  it('GET (200)', (done) => {
     request(app)
       .get('/')
       .expect(200)

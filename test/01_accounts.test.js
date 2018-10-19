@@ -8,7 +8,7 @@ describe('/accounts', () => {
     .then(() => knex.migrate.latest())
     .then(() => knex.seed.run()));
 
-  it('GET', (done) => {
+  it('GET (200)', (done) => {
     request(app)
       .get('/accounts')
       .expect(200)
@@ -21,7 +21,7 @@ describe('/accounts', () => {
       });
   });
 
-  it('POST {}', (done) => {
+  it('POST {} (400)', (done) => {
     request(app)
       .post('/accounts')
       .expect(400)
