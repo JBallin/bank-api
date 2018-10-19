@@ -1,6 +1,6 @@
 const knex = require('./db');
 
-const getAllAccounts = () => knex('accounts').orderBy('created_at', 'desc');
+const getAllAccounts = () => knex('accounts');
 const getAccountById = id => knex('accounts').where('id', id).first();
 const createAccount = payload => knex('accounts').insert(payload, '*');
 
