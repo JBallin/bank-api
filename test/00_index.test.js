@@ -8,4 +8,9 @@ describe('/', () => {
       .expect(200)
       .expect('Content-Type', /html/, done);
   });
+  it('POST (404)', (done) => {
+    request(app)
+      .post('/')
+      .expect(404, done);
+  });
 });
