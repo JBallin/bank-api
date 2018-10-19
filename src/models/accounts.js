@@ -1,4 +1,4 @@
-const accountsQuery = require('../../queries/accounts');
+const accountsQuery = require('../../db/queries/accounts');
 
 const getAllAccounts = () => {
   const accounts = accountsQuery.getAllAccounts();
