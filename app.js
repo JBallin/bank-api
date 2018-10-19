@@ -16,8 +16,8 @@ app.use('/accounts', accountsRouter);
 
 app.all('*', (req, res) => res.sendStatus(404));
 
-app.use((err, req, res) => {
-  res.status(err.status).json(err);
+app.use((err, req, res, next) => { // eslint-disable-line
+  res.status(err.status).send(err.message || err);
 });
 
 app.listen(port, () => {
