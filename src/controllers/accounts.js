@@ -1,30 +1,26 @@
 const model = require('../models/accounts');
 
+const sendResult = async (cb, args, res, next) => {
+  try {
+    res.json(await cb(...args));
+  } catch (err) {
+    next({ message: err.message || err, status: err.status || 500 });
+  }
+};
+
 const getAllAccounts = (req, res, next) => {
-  const promise = model.getAllAccounts();
-
-  promise.then(result => (result.error ? next(result) : res.status(200).json(result)));
-
-  promise.catch((err) => {
-    next(err);
-  });
+  const [cb, args] = [model.getAllAccounts, []];
+  return sendResult(cb, args, res, next);
 };
 
 const getAccountById = (req, res, next) => {
-  const { id } = req.params;
-  model.getAccountById(id)
-    .then(result => (result.error ? next(result) : res.status(200).json(result)))
-    .catch((err) => {
-      next(err);
-    });
+  const [cb, args] = [model.getAccountById, [req.params.id]];
+  return sendResult(cb, args, res, next);
 };
 
 const createAccount = (req, res, next) => {
-  model.createAccount(req.body)
-    .then(result => (result.error ? next(result) : res.status(200).json(result)))
-    .catch((err) => {
-      next(err);
-    });
+  const [cb, args] = [model.createAccount, [req.body]];
+  return sendResult(cb, args, res, next);
 };
 
 module.exports = { getAllAccounts, getAccountById, createAccount };
