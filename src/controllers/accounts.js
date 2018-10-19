@@ -19,6 +19,12 @@ const getAccountById = (req, res, next) => {
     });
 };
 
+const createAccount = (req, res, next) => {
+  model.createAccount(req.body)
+    .then(result => (result.error ? next(result) : res.status(200).json(result)))
+    .catch((err) => {
+      next(err);
+    });
 };
 
-module.exports = { getAllAccounts, getAccountById };
+module.exports = { getAllAccounts, getAccountById, createAccount };
