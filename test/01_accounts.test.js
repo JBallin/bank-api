@@ -20,4 +20,14 @@ describe('/accounts', () => {
         done();
       });
   });
+
+  it('POST {}', (done) => {
+    request(app)
+      .post('/accounts')
+      .expect(400)
+      .end((err, res) => {
+        assert.equal(res.text, 'Invalid input');
+        done();
+      });
+  });
 });
