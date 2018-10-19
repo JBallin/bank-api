@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "dev": "nodemon",
-    "test": "eslint . && mocha",
+    "test": "eslint . && NODE_ENV='test' PORT='3001' mocha --exit",
     "seed": "knex migrate:rollback; knex migrate:latest; knex seed:run",
     "seed-prod": "heroku run 'knex migrate:rollback; knex migrate:latest; knex seed:run'",
     "start": "node app.js"
