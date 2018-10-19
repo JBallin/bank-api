@@ -17,6 +17,7 @@ app.use('/accounts', accountsRouter);
 app.all('*', (req, res) => res.sendStatus(404));
 
 app.use((err, req, res, next) => { // eslint-disable-line
+  if (err.error && NODE_ENV !== 'test') console.error(err.error); // eslint-disable-line no-console
   res.status(err.status).send(err.message || err);
 });
 
