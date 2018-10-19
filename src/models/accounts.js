@@ -11,8 +11,29 @@ const getAllAccounts = () => {
 const getAccountById = id => accountsQuery.getAccountById(id)
   .then(result => (!result ? { error: `Error retrieving account with id ${id}`, status: 500 } : result));
 
+const validatePayload = (payload) => {
+  let updatedPayload = false;
 
-const createAccount = payload => accountsQuery.createAccount(payload)
-  .then(res => (!res ? { error: 'error creating account', status: 500 } : res));
+  const {
+    name: customer,
+    bank_name: bank,
+    description,
+    transactions,
+  } = payload;
+
+  if (!customer || !bank || !description) throw { message: 'Invalid input', status: 400 };
+  if (!transactions) updatedPayload = { ...payload, transactions: [] };
+
+  return updatedPayload || payload;
+};
+
+const createAccount = (payload) => {
+  const validatedPayload = validatePayload(payload);
+  return accountsQuery.createAccount(validatedPayload)
+    .then((res, err) => {
+      if (err) throw { message: 'Error creating account', status: 500, error: err };
+      return res;
+    });
+};
 
 module.exports = { getAllAccounts, getAccountById, createAccount };
