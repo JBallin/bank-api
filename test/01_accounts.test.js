@@ -21,13 +21,17 @@ describe('/accounts', () => {
       });
   });
 
-  it('POST {} (400)', (done) => {
-    request(app)
-      .post('/accounts')
-      .expect(400)
-      .end((err, res) => {
-        assert.equal(res.text, 'Invalid input');
-        done();
-      });
+  describe('POST', () => {
+    it('{} (400)', (done) => {
+      request(app)
+        .post('/accounts')
+        .expect(400)
+        .end((err, res) => {
+          if (err) done(err);
+          assert.equal(res.text, 'Invalid input');
+          done();
+        });
+    });
+
   });
 });
