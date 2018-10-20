@@ -124,7 +124,7 @@ describe('accounts', () => {
             knex('accounts')
               .where('id', 7)
               .then(res => assert.lengthOf(res, 0))
-              .then(() => done());
+              .then(done);
           });
       });
 
