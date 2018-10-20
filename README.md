@@ -1,18 +1,24 @@
 # Bank API
 
-#### Accounts
-* ID: (You Choose) A unique id that represents the account. Created automatically.
-* Name: (String) Name of the account. Required.
-* Bank Name: (String) Name of the bank the account is associated with. Required.
-* Description: (String) A description of the account. Required.
-* Transactions: (Array) An array of transactions.
+### Description
+A "Complex API" that supports full CRUD (create, read, update, delete), uses the Model-View-Controller design pattern, features full test coverage, has extensive error handling, and follows "Restful" API conventions.
 
-#### Transactions
-* ID: (You Choose) A unique id that represents the transaction. Created automatically.
-* Title: (String) A title for the transaction. Cannot be more than 8 characters. Required.
-* Amount: (Number) A positive or negative number depending on the type of transaction. Required.
-* Pending: (Boolean) A true/false value for whether or not the transaction is pending. Required. Defaults to true.
+### Features
+* View all accounts/transactions (accounts pull in transactions using SQL Join)
+* View specific accounts/transactions
+* Create & delete accounts/transactions
+* Update specific accounts/transactions
 
-#### Routes
-* Create, Read, Update, and Delete accounts.
-* Create, Read, Update, and Delete transactions through accounts.
+### Usage
+```
+$ npm i
+$ npm run dev
+$ open http://localhost:3000
+$ npm test
+```
+
+### Endpoints
+* `/accounts`: GET, POST
+* `/accounts/:id`: GET, PUT, DELETE
+* `/transactions`: GET, POST
+* `/transactions/:id`: GET, PUT, DELETE
