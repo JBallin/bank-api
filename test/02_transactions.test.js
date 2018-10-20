@@ -7,7 +7,7 @@ const { seeds } = require('../db/seeds/00_accounts');
 const newTransaction = {
   title: 'Best Buy',
   amount: 20.12,
-  pending: 1,
+  pending: true,
 };
 
 describe('transactions', () => {
