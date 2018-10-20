@@ -85,7 +85,7 @@ describe('/accounts', () => {
   describe('PUT', () => {
     it('should update name', (done) => {
       request(app)
-        .put('/accounts')
+        .put('/accounts/7')
         .send(payloadNewName)
         .expect(204)
         .expect('Content-Type', /json/)
