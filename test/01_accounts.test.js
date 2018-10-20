@@ -72,5 +72,19 @@ describe('/accounts', () => {
           done();
         });
     });
+
+    it('{payload w/o trxns} (201)', (done) => {
+      request(app)
+        .post('/accounts')
+        .send(payloadMissingTransactions)
+        .expect(201)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) done(err);
+          assert.lengthOf(res.body, 1);
+          assertMatch(properPayload, res.body[0]);
+          done();
+        });
+    });
   });
 });
