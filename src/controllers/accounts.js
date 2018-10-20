@@ -29,6 +29,12 @@ const updateAccount = (req, res, next) => {
   return sendResult(cb, args, res, next);
 };
 
+const deleteAccount = (req, res, next) => {
+  const [cb, args] = [model.deleteAccount, [req.params.id]];
+  res.status(204);
+  return sendResult(cb, args, res, next);
+};
+
 module.exports = {
-  getAllAccounts, getAccountById, createAccount, updateAccount,
+  getAllAccounts, getAccountById, createAccount, updateAccount, deleteAccount,
 };

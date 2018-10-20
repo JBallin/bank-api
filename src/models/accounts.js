@@ -47,6 +47,13 @@ const updateAccount = (id, payload) => query.updateAccount(id, payload)
     return res;
   });
 
+const deleteAccount = id => query.deleteAccount(id)
+  .then((res, err) => {
+    if (err) throw { message: 'Error deleting account', status: 500, error: err };
+    if (!res) throw { message: `No account with id ${id}`, status: 400 };
+    return res;
+  });
+
 module.exports = {
-  getAllAccounts, getAccountById, createAccount, updateAccount,
+  getAllAccounts, getAccountById, createAccount, updateAccount, deleteAccount,
 };
