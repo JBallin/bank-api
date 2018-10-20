@@ -2,7 +2,7 @@ const seeds = [
   {
     id: 1,
     account_id: 2,
-    title: 'Whole Foods',
+    title: 'Safeway',
     amount: 40.79,
     pending: false,
   },
@@ -23,7 +23,7 @@ const seeds = [
   {
     id: 4,
     account_id: 1,
-    title: 'Burger King',
+    title: 'Wingstop',
     amount: 4.82,
     pending: false,
   },
@@ -37,7 +37,7 @@ const seeds = [
   {
     id: 6,
     account_id: 1,
-    title: 'Yard House',
+    title: 'Ozumo',
     amount: 76.20,
     pending: false,
   },
