@@ -5,6 +5,7 @@ const app = express();
 app.use(express.json(), express.urlencoded({ extended: true }));
 const { NODE_ENV, PORT } = process.env;
 if (NODE_ENV !== 'test') app.use(logger('dev'));
+app.disable('x-powered-by');
 
 const port = PORT || 3000;
 
