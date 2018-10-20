@@ -112,6 +112,7 @@ describe('accounts', () => {
             if (err) done(err);
             assert.lengthOf(res.body, 1);
             assertMatch(payloadNewName, res.body[0]);
+            assert.notEqual(res.body[0].created_at, res.body[0].updated_at);
             done();
           });
       });
