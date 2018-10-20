@@ -1,6 +1,6 @@
 /* eslint-disable no-throw-literal */
 
-const query = require('../../db/queries/transactions');
+const query = require('../queries/transactions');
 
 const validatePayload = (payload) => {
   const {

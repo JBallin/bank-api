@@ -1,6 +1,6 @@
 const request = require('supertest');
 const { assert } = require('chai');
-const knex = require('../db/queries/db');
+const knex = require('../src/queries/db');
 const app = require('../app');
 const { seeds } = require('../db/seeds/01_transactions');
 const { assertMatch } = require('./utils');

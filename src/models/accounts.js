@@ -1,6 +1,6 @@
 /* eslint-disable no-throw-literal */
 
-const query = require('../../db/queries/accounts');
+const query = require('../queries/accounts');
 
 const validatePayload = (payload) => {
   const { name: customer, bank_name: bank, description } = payload;
