@@ -24,77 +24,83 @@ const assertMatch = (payload, resBody) => {
   });
 };
 
-describe('/accounts', () => {
+describe('accounts', () => {
   before(() => knex.migrate.rollback()
     .then(() => knex.migrate.latest())
     .then(() => knex.seed.run()));
 
-  it('GET (200)', (done) => {
-    request(app)
-      .get('/accounts')
-      .expect(200)
-      .expect('Content-Type', /json/)
-      .end((err, res) => {
-        if (err) done(err);
-        assertMatch(seed1, res.body[0]);
-        done();
+  describe('/accounts', () => {
+    describe('GET', () => {
+      it('(200)', (done) => {
+        request(app)
+          .get('/accounts')
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .end((err, res) => {
+            if (err) done(err);
+            assertMatch(seed1, res.body[0]);
+            done();
+          });
       });
+    });
+
+    describe('POST', () => {
+      it('{} (400)', (done) => {
+        request(app)
+          .post('/accounts')
+          .expect(400)
+          .end((err, res) => {
+            if (err) done(err);
+            assert.equal(res.text, 'Invalid input');
+            done();
+          });
+      });
+
+      it('{payload} (201)', (done) => {
+        request(app)
+          .post('/accounts')
+          .send(properPayload)
+          .expect(201)
+          .expect('Content-Type', /json/)
+          .end((err, res) => {
+            if (err) done(err);
+            assert.lengthOf(res.body, 1);
+            assertMatch(properPayload, res.body[0]);
+            done();
+          });
+      });
+
+      it('{payload w/o trxns} (201)', (done) => {
+        request(app)
+          .post('/accounts')
+          .send(payloadMissingTransactions)
+          .expect(201)
+          .expect('Content-Type', /json/)
+          .end((err, res) => {
+            if (err) done(err);
+            assert.lengthOf(res.body, 1);
+            assertMatch(properPayload, res.body[0]);
+            done();
+          });
+      });
+    });
   });
 
-  describe('POST', () => {
-    it('{} (400)', (done) => {
-      request(app)
-        .post('/accounts')
-        .expect(400)
-        .end((err, res) => {
-          if (err) done(err);
-          assert.equal(res.text, 'Invalid input');
-          done();
-        });
-    });
-
-    it('{payload} (201)', (done) => {
-      request(app)
-        .post('/accounts')
-        .send(properPayload)
-        .expect(201)
-        .expect('Content-Type', /json/)
-        .end((err, res) => {
-          if (err) done(err);
-          assert.lengthOf(res.body, 1);
-          assertMatch(properPayload, res.body[0]);
-          done();
-        });
-    });
-
-    it('{payload w/o trxns} (201)', (done) => {
-      request(app)
-        .post('/accounts')
-        .send(payloadMissingTransactions)
-        .expect(201)
-        .expect('Content-Type', /json/)
-        .end((err, res) => {
-          if (err) done(err);
-          assert.lengthOf(res.body, 1);
-          assertMatch(properPayload, res.body[0]);
-          done();
-        });
-    });
-  });
-
-  describe('PUT', () => {
-    it('should update name', (done) => {
-      request(app)
-        .put('/accounts/7')
-        .send(payloadNewName)
-        .expect(204)
-        .expect('Content-Type', /json/)
-        .end((err, res) => {
-          if (err) done(err);
-          assert.lengthOf(res.body, 1);
-          assertMatch(payloadNewName, res.body[0]);
-          done();
-        });
+  describe('/accounts/:id', () => {
+    describe('PUT', () => {
+      it('should update name', (done) => {
+        request(app)
+          .put('/accounts/7')
+          .send(payloadNewName)
+          .expect(204)
+          .expect('Content-Type', /json/)
+          .end((err, res) => {
+            if (err) done(err);
+            assert.lengthOf(res.body, 1);
+            assertMatch(payloadNewName, res.body[0]);
+            done();
+          });
+      });
     });
   });
 });
