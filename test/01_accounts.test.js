@@ -27,7 +27,7 @@ describe('accounts', () => {
           .expect('Content-Type', /json/)
           .end((err, res) => {
             if (err) done(err);
-            assertMatch(seeds[0], res.body[0]);
+            assertMatch(res.body[0], seeds[0]);
             done();
           });
       });
@@ -53,7 +53,7 @@ describe('accounts', () => {
           .expect('Content-Type', /json/)
           .end((err, res) => {
             if (err) done(err);
-            assertMatch(properPayload, res.body);
+            assertMatch(res.body, properPayload);
             done();
           });
       });
@@ -69,7 +69,7 @@ describe('accounts', () => {
           .expect('Content-Type', /json/)
           .end((err, res) => {
             if (err) done(err);
-            assertMatch(seeds[0], res.body);
+            assertMatch(res.body, seeds[0]);
             done();
           });
       });
@@ -95,7 +95,7 @@ describe('accounts', () => {
           .expect('Content-Type', /json/)
           .end((err, res) => {
             if (err) done(err);
-            assertMatch(payloadNewName, res.body);
+            assertMatch(res.body, payloadNewName);
             assert.notEqual(res.body.created_at, res.body.updated_at);
             done();
           });
