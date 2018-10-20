@@ -87,6 +87,20 @@ describe('accounts', () => {
   });
 
   describe('/accounts/:id', () => {
+    describe('GET', () => {
+      it('(200)', (done) => {
+        request(app)
+          .get('/accounts/1')
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .end((err, res) => {
+            if (err) done(err);
+            assertMatch(seed1, res.body);
+            done();
+          });
+      });
+    });
+
     describe('PUT', () => {
       it('should update name', (done) => {
         request(app)
