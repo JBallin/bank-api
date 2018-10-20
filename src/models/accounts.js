@@ -15,22 +15,25 @@ const validatePayload = (payload) => {
   return updatedPayload || payload;
 };
 
-const getAllAccounts = () => {
-  const accounts = query.getAllAccounts();
-
-  return accounts.then(result => (!result.length ? { error: 'Error retrieving accounts', status: 500 } : result));
-};
+const getAllAccounts = () => query.getAllAccounts()
+  .then((res, err) => {
+    if (err) throw { message: 'Error getting accounts', status: 500, error: err };
+    if (!res.length) throw { message: 'No accounts in system', status: 500 };
+    return res;
+  });
 
 const getAccountById = id => query.getAccountById(id)
-  .then(result => (!result ? { error: `Error retrieving account with id ${id}`, status: 500 } : result));
-
+  .then((res) => {
+    if (!res) throw { message: `No account with id ${id}`, status: 400 };
+    return res;
+  });
 
 const createAccount = (payload) => {
   const validatedPayload = validatePayload(payload);
   return query.createAccount(validatedPayload)
     .then((result, err) => {
-      const res = result[0];
       if (err) throw { message: 'Error creating account', status: 500, error: err };
+      const res = result[0];
       return res;
     });
 };
@@ -39,6 +42,7 @@ const updateAccount = (id, payload) => query.updateAccount(id, payload)
   .then((result, err) => {
     const res = result[0];
     if (err) throw { message: 'Error updating account', status: 500, error: err };
+    if (!res) throw { message: `No account with id ${id}`, status: 400 };
     return res;
   });
 
