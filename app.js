@@ -11,9 +11,11 @@ const port = PORT || 3000;
 
 const indexRouter = require('./src/routes/index');
 const accountsRouter = require('./src/routes/accounts');
+const transactionsRouter = require('./src/routes/transactions');
 
 app.use('/', indexRouter);
 app.use('/accounts', accountsRouter);
+app.use('/transactions', transactionsRouter);
 
 app.all('*', (req, res) => res.sendStatus(404));
 
