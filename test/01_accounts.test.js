@@ -2,7 +2,7 @@ const request = require('supertest');
 const { assert, expect } = require('chai');
 const knex = require('../db/queries/db');
 const app = require('../app');
-const { seeds } = require('../db/seeds/accounts');
+const { seeds } = require('../db/seeds/00_accounts');
 
 const properPayload = {
   name: 'Roger Rabbit',
