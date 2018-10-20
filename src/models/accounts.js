@@ -22,10 +22,11 @@ const getAllAccounts = async () => query.getAllAccounts()
   });
 
 const getAccountById = id => query.getAccountById(id)
-  .then((res, err) => {
+  .then(async (account, err) => {
     if (err) throw { message: 'Error getting account', status: 500, error: err };
-    if (!res) throw { message: `No account with id ${id}`, status: 400 };
-    return res;
+    if (!account) throw { message: `No account with id ${id}`, status: 400 };
+    const transactions = await query.getAccountTransactions(account.id);
+    return { ...account, transactions };
   });
 
 const createAccount = (payload) => {
@@ -33,17 +34,18 @@ const createAccount = (payload) => {
   return query.createAccount(validatedPayload)
     .then((result, err) => {
       if (err) throw { message: 'Error creating account', status: 500, error: err };
-      const res = result[0];
-      return res;
+      const account = result[0];
+      return { ...account, transactions: [] };
     });
 };
 
 const updateAccount = (id, payload) => query.updateAccount(id, payload)
-  .then((result, err) => {
-    const res = result[0];
+  .then(async (result, err) => {
+    const account = result[0];
     if (err) throw { message: 'Error updating account', status: 500, error: err };
-    if (!res) throw { message: `No account with id ${id}`, status: 400 };
-    return res;
+    if (!account) throw { message: `No account with id ${id}`, status: 400 };
+    const transactions = await query.getAccountTransactions(account.id);
+    return { ...account, transactions };
   });
 
 const deleteAccount = id => query.deleteAccount(id)
