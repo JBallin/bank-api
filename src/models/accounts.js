@@ -23,7 +23,8 @@ const getAllAccounts = () => query.getAllAccounts()
   });
 
 const getAccountById = id => query.getAccountById(id)
-  .then((res) => {
+  .then((res, err) => {
+    if (err) throw { message: 'Error getting account', status: 500, error: err };
     if (!res) throw { message: `No account with id ${id}`, status: 400 };
     return res;
   });
