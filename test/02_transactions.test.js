@@ -82,6 +82,7 @@ describe('transactions', () => {
           .end((err, res) => {
             if (err) done(err);
             assertMatch(res.body, { ...newTransaction, pending: false });
+            assert.notEqual(res.body.created_at, res.body.updated_at);
             done();
           });
       });
