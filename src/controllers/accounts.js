@@ -20,6 +20,7 @@ const getAccountById = (req, res, next) => {
 
 const createAccount = (req, res, next) => {
   const [cb, args] = [model.createAccount, [req.body]];
+  res.status(201);
   return sendResult(cb, args, res, next);
 };
 
