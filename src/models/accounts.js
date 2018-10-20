@@ -15,10 +15,7 @@ const validatePayload = (payload) => {
   let updatedPayload = false;
 
   const {
-    name: customer,
-    bank_name: bank,
-    description,
-    transactions,
+    name: customer, bank_name: bank, description, transactions,
   } = payload;
 
   if (!customer || !bank || !description) throw { message: 'Invalid input', status: 400 };

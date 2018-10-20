@@ -9,18 +9,11 @@ const bank_name = 'Bank of America';
 const description = 'Savings';
 const transactions = [];
 const properPayload = {
-  name,
-  bank_name,
-  description,
-  transactions,
+  name, bank_name, description, transactions,
 };
 const payloadMissingTransactions = { name, bank_name, description };
 const seed1 = {
-  id: 1,
-  name: 'John Doe',
-  bank_name: 'Bank of America',
-  description: 'Main',
-  transactions: [],
+  id: 1, name: 'John Doe', bank_name: 'Bank of America', description: 'Main', transactions: [],
 };
 const payloadNewName = { ...properPayload, name: 'MJ' };
 /* eslint-enable camelcase */
