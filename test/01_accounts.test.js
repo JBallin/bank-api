@@ -123,6 +123,16 @@ describe('accounts', () => {
             assert.notEqual(res.body.created_at, res.body.updated_at);
             done();
           });
+      });
+
+      it('DNE (400)', (done) => {
+        request(app)
+          .put('/accounts/0')
+          .send(payloadNewName)
+          .expect(400)
+          .end((err, res) => {
+            if (err) done(err);
+            assert.equal(res.text, 'No account with id 0');
             done();
           });
       });
