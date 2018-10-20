@@ -3,16 +3,9 @@
 const query = require('../../db/queries/accounts');
 
 const validatePayload = (payload) => {
-  let updatedPayload = false;
-
-  const {
-    name: customer, bank_name: bank, description, transactions,
-  } = payload;
-
+  const { name: customer, bank_name: bank, description } = payload;
   if (!customer || !bank || !description) throw { message: 'Invalid input', status: 400 };
-  if (!transactions) updatedPayload = { ...payload, transactions: [] };
-
-  return updatedPayload || payload;
+  return payload;
 };
 
 const getAllAccounts = () => query.getAllAccounts()
