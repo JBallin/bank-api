@@ -1,8 +1,9 @@
 const request = require('supertest');
-const { assert, expect } = require('chai');
+const { assert } = require('chai');
 const knex = require('../db/queries/db');
 const app = require('../app');
 const { seeds } = require('../db/seeds/00_accounts');
+const { assertMatch } = require('./utils');
 
 const properPayload = {
   name: 'Roger Rabbit',
@@ -11,12 +12,6 @@ const properPayload = {
 };
 
 const payloadNewName = { name: 'MJ' };
-
-const assertMatch = (payload, resBody) => {
-  Object.keys(payload).forEach((prop) => {
-    expect(resBody).to.have.deep.property(prop, payload[prop]);
-  });
-};
 
 describe('accounts', () => {
   before(() => knex.migrate.rollback()
