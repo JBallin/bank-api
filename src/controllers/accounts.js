@@ -24,4 +24,11 @@ const createAccount = (req, res, next) => {
   return sendResult(cb, args, res, next);
 };
 
-module.exports = { getAllAccounts, getAccountById, createAccount };
+const updateAccount = (req, res, next) => {
+  const [cb, args] = [model.updateAccount, [req.params.id, req.body]];
+  return sendResult(cb, args, res, next);
+};
+
+module.exports = {
+  getAllAccounts, getAccountById, createAccount, updateAccount,
+};

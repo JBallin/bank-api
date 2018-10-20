@@ -33,4 +33,12 @@ const createAccount = (payload) => {
     });
 };
 
-module.exports = { getAllAccounts, getAccountById, createAccount };
+const updateAccount = (id, payload) => query.updateAccount(id, payload)
+  .then((res, err) => {
+    if (err) throw { message: 'Error updating account', status: 500, error: err };
+    return res;
+  });
+
+module.exports = {
+  getAllAccounts, getAccountById, createAccount, updateAccount,
+};
