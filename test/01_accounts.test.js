@@ -2,6 +2,7 @@ const request = require('supertest');
 const { assert, expect } = require('chai');
 const knex = require('../db/queries/db');
 const app = require('../app');
+const { seeds } = require('../db/seeds/accounts');
 
 const properPayload = {
   name: 'Roger Rabbit',
@@ -14,10 +15,6 @@ const payloadMissingTransactions = {
   name: 'Bugs Bunny',
   bank_name: 'Toons Bank',
   description: 'Basketball fund',
-};
-
-const seed1 = {
-  id: 1, name: 'John Doe', bank_name: 'Bank of America', description: 'Main', transactions: [],
 };
 
 const payloadNewName = { name: 'MJ' };
@@ -42,7 +39,7 @@ describe('accounts', () => {
           .expect('Content-Type', /json/)
           .end((err, res) => {
             if (err) done(err);
-            assertMatch(seed1, res.body[0]);
+            assertMatch(seeds[0], res.body[0]);
             done();
           });
       });
@@ -97,7 +94,7 @@ describe('accounts', () => {
           .expect('Content-Type', /json/)
           .end((err, res) => {
             if (err) done(err);
-            assertMatch(seed1, res.body);
+            assertMatch(seeds[0], res.body);
             done();
           });
       });
