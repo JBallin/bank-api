@@ -146,7 +146,14 @@ describe('accounts', () => {
       it('(200)', (done) => {
         request(app)
           .delete('/accounts/7')
-          .expect(204, done);
+          .expect(204)
+          .end((err) => {
+            if (err) done(err);
+            knex('accounts')
+              .where('id', 7)
+              .then(res => assert.lengthOf(res, 0))
+              .then(() => done());
+          });
       });
 
       it('DNE (400)', (done) => {
