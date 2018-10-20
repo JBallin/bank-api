@@ -137,5 +137,19 @@ describe('accounts', () => {
           });
       });
     });
+
+    describe('DELETE', () => {
+      it('(200)', (done) => {
+        request(app)
+          .delete('/accounts/7')
+          .expect(204, done);
+      });
+
+      it('DNE (400)', (done) => {
+        request(app)
+          .delete('/accounts/0')
+          .expect(400, done);
+      });
+    });
   });
 });
