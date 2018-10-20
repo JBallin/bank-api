@@ -106,7 +106,7 @@ describe('accounts', () => {
         request(app)
           .put('/accounts/7')
           .send(payloadNewName)
-          .expect(204)
+          .expect(200)
           .expect('Content-Type', /json/)
           .end((err, res) => {
             if (err) done(err);
