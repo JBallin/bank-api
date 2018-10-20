@@ -10,14 +10,14 @@ const seeds = [
     id: 2,
     account_id: 5,
     title: 'Chipotle',
-    amount: 10.74,
+    amount: -10.74,
     pending: true,
   },
   {
     id: 3,
     account_id: 6,
     title: 'Target',
-    amount: 480.52,
+    amount: -480.52,
     pending: false,
   },
   {
