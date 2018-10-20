@@ -97,6 +97,17 @@ describe('accounts', () => {
             done();
           });
       });
+
+      it('DNE (400)', (done) => {
+        request(app)
+          .get('/accounts/0')
+          .expect(400)
+          .end((err, res) => {
+            if (err) done(err);
+            assert.equal(res.text, 'No account with id 0');
+            done();
+          });
+      });
     });
 
     describe('PUT', () => {
