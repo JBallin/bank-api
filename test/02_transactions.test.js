@@ -5,6 +5,7 @@ const app = require('../app');
 const { seeds } = require('../db/seeds/00_accounts');
 
 const newTransaction = {
+  account_id: 4,
   title: 'Best Buy',
   amount: 20.12,
   pending: true,
