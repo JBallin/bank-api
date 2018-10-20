@@ -21,7 +21,7 @@ const payloadNewName = { name: 'MJ' };
 
 const assertMatch = (payload, resBody) => {
   Object.keys(payload).forEach((prop) => {
-    expect(resBody).to.have.deep.property(prop, payload[prop]); // eslint-disable-line
+    expect(resBody).to.have.deep.property(prop, payload[prop]);
   });
 };
 
