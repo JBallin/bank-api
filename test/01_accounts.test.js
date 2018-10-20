@@ -3,6 +3,7 @@ const { assert } = require('chai');
 const knex = require('../src/queries/db');
 const app = require('../app');
 const { seeds } = require('../db/seeds/00_accounts');
+const transactionSeeds = require('../db/seeds/01_transactions').seeds;
 const { assertMatch } = require('./utils');
 
 const properPayload = {
@@ -12,6 +13,9 @@ const properPayload = {
 };
 
 const payloadNewName = { name: 'MJ' };
+
+const firstAccountTransactions = transactionSeeds
+  .filter(transaction => transaction.account_id === 1);
 
 describe('accounts', () => {
   before(() => knex.migrate.rollback()
@@ -28,6 +32,9 @@ describe('accounts', () => {
           .end((err, res) => {
             if (err) done(err);
             assertMatch(res.body[0], seeds[0]);
+            res.body[0].transactions.forEach((transaction, i) => {
+              assertMatch(firstAccountTransactions[i], transaction);
+            });
             done();
           });
       });
