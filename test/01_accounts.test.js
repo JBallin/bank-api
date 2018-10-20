@@ -22,6 +22,7 @@ const seed1 = {
   description: 'Main',
   transactions: [],
 };
+const payloadNewName = { ...properPayload, name: 'MJ' };
 /* eslint-enable camelcase */
 
 const assertMatch = (payload, resBody) => {
@@ -83,6 +84,22 @@ describe('/accounts', () => {
           if (err) done(err);
           assert.lengthOf(res.body, 1);
           assertMatch(properPayload, res.body[0]);
+          done();
+        });
+    });
+  });
+
+  describe('PUT', () => {
+    it('should update name', (done) => {
+      request(app)
+        .put('/accounts')
+        .send(payloadNewName)
+        .expect(204)
+        .expect('Content-Type', /json/)
+        .end((err, res) => {
+          if (err) done(err);
+          assert.lengthOf(res.body, 1);
+          assertMatch(payloadNewName, res.body[0]);
           done();
         });
     });
