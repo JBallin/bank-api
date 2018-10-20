@@ -28,14 +28,16 @@ const getAccountById = id => query.getAccountById(id)
 const createAccount = (payload) => {
   const validatedPayload = validatePayload(payload);
   return query.createAccount(validatedPayload)
-    .then((res, err) => {
+    .then((result, err) => {
+      const res = result[0];
       if (err) throw { message: 'Error creating account', status: 500, error: err };
       return res;
     });
 };
 
 const updateAccount = (id, payload) => query.updateAccount(id, payload)
-  .then((res, err) => {
+  .then((result, err) => {
+    const res = result[0];
     if (err) throw { message: 'Error updating account', status: 500, error: err };
     return res;
   });
