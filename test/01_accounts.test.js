@@ -15,7 +15,7 @@ const payloadMissingTransactions = { name, bank_name, description };
 const seed1 = {
   id: 1, name: 'John Doe', bank_name: 'Bank of America', description: 'Main', transactions: [],
 };
-const payloadNewName = { ...properPayload, name: 'MJ' };
+const payloadNewName = { name: 'MJ' };
 /* eslint-enable camelcase */
 
 const assertMatch = (payload, resBody) => {
@@ -102,7 +102,7 @@ describe('accounts', () => {
     });
 
     describe('PUT', () => {
-      it('should update name', (done) => {
+      it('name (200)', (done) => {
         request(app)
           .put('/accounts/7')
           .send(payloadNewName)
