@@ -8,11 +8,17 @@ const validatePayload = (payload) => {
   return payload;
 };
 
-const getAllAccounts = () => query.getAllAccounts()
-  .then((res, err) => {
+const getAllAccounts = async () => query.getAllAccounts()
+  .then(async (res, err) => {
     if (err) throw { message: 'Error getting accounts', status: 500, error: err };
     if (!res.length) throw { message: 'No accounts in system', status: 500 };
-    return res;
+
+    const accountsWithTransactions = await res.map(async (account) => {
+      const transactions = await query.getAccountTransactions(account.id);
+      return ({ ...account, transactions });
+    });
+
+    return Promise.all(accountsWithTransactions);
   });
 
 const getAccountById = id => query.getAccountById(id)
