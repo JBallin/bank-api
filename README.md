@@ -12,8 +12,15 @@ A "Complex API" that supports full CRUD (create, read, update, delete), uses the
 ### Usage
 ```
 $ npm i
-$ npm run dev
+$ createdb bank_dev
+$ npm run seed
+$ npm start
 $ open http://localhost:3000
+```
+
+### Testing
+```
+$ createdb bank_test
 $ npm test
 ```
 
