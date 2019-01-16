@@ -1,15 +1,15 @@
 # Bank API
 
-### Description
+## Description
 A "Complex API" that supports full CRUD (create, read, update, delete), uses the Model-View-Controller design pattern, features full test coverage, has extensive error handling, and follows "Restful" API conventions.
 
-### Features
+## Features
 * View all accounts/transactions (accounts pull in transactions using SQL Join)
 * View specific accounts/transactions
 * Create & delete accounts/transactions
 * Update specific accounts/transactions
 
-### Usage
+## Usage
 ```
 $ npm i
 $ createdb bank_dev
@@ -18,13 +18,13 @@ $ npm start
 $ open http://localhost:3000
 ```
 
-### Testing
+## Testing
 ```
 $ createdb bank_test
 $ npm test
 ```
 
-### Endpoints
+## Endpoints
 * `/accounts`: GET, POST
 * `/accounts/:id`: GET, PUT, DELETE
 * `/transactions`: GET, POST
